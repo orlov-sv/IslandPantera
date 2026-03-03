@@ -5,8 +5,14 @@ import com.javarush.island.orlov.entity.animals.Animal;
 
 public class Herbivore extends Animal {
 
+
     @Override
     protected void eat(Location location){
 
+    }
+
+    @Override
+    protected Animal createChild() {
+        return null;
     }
 }

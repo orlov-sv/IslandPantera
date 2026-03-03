@@ -8,6 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Location {
+    @Getter
+    private int x;
+    @Getter
+    private int y;
+
+    public Location(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 
     @Getter
     public List<Animal> animals = new ArrayList<>();

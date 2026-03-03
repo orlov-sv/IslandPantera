@@ -9,4 +9,9 @@ public class Predator extends Animal {
     protected void eat(Location location){
 
     }
+
+    @Override
+    protected Animal createChild() {
+        return null;
+    }
 }
