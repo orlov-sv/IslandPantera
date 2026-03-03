@@ -3,8 +3,10 @@ package com.javarush.island.orlov;
 import lombok.Getter;
 
 public class Island {
-    private final int width;
-    private final int height;
+    @Getter
+    public final int width;
+    @Getter
+    public final int height;
 
    @Getter
    private final Location[][] locations;
@@ -12,7 +14,7 @@ public class Island {
     public Island(int width, int height){
         this.width = width;
         this.height = height;
-        this.locations = new Location[height][width];
+        this.locations = new Location[width][height];
 
         initialize();
     }
