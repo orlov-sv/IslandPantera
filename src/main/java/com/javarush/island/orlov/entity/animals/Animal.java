@@ -2,6 +2,7 @@ package com.javarush.island.orlov.entity.animals;
 
 import com.javarush.island.orlov.Island;
 import com.javarush.island.orlov.Location;
+import lombok.Getter;
 import lombok.Setter;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -11,12 +12,13 @@ public abstract class Animal {
     @Setter
     protected Location location;
 
+    @Getter
     protected int weight;
     protected  int maxAn;
     protected int speed;
     protected int foodNeed;
     protected int foodEaten;
-    protected boolean alive;
+    volatile public boolean alive;
 
 
 
@@ -63,6 +65,7 @@ public abstract class Animal {
 
                 if (count >= 2 && count < maxAn){
                     Animal baby = createChild();
+                    baby.setLocation(location);
                     location.addAnimals(baby);
                 }
         }
