@@ -3,6 +3,14 @@ package com.javarush.island.orlov.entity.animals.Predator;
 import com.javarush.island.orlov.entity.animals.Animal;
 import com.javarush.island.orlov.entity.animals.Herbivore.*;
 public class Fox extends Predator {
+    public Fox() {
+        this.weight = 8;
+        this.maxAn = 30;
+        this.speed = 2;
+        this.foodNeed = 2;
+        this.alive = true;
+    }
+
     @Override
     protected int getEatChance(Animal animal) {
 

@@ -4,6 +4,15 @@ import com.javarush.island.orlov.entity.animals.Herbivore.*;
 import com.javarush.island.orlov.entity.animals.Animal;
 
 public class Bear extends Predator {
+
+    public Bear() {
+        this.weight = 505;
+        this.maxAn = 5;
+        this.speed = 2;
+        this.foodNeed = 80;
+        this.alive = true;
+    }
+
     @Override
     protected int getEatChance(Animal animal) {
         if (animal instanceof Boa) return 80;

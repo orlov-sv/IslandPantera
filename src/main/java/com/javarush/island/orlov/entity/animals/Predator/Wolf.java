@@ -5,8 +5,13 @@ import com.javarush.island.orlov.entity.animals.Herbivore.*;
 
 
 public class Wolf extends Predator{
-
-
+    public Wolf() {
+        this.weight = 50;
+        this.maxAn = 30;
+        this.speed = 3;
+        this.foodNeed = 8;
+        this.alive = true;
+    }
 
     @Override
     protected int getEatChance(Animal animal) {

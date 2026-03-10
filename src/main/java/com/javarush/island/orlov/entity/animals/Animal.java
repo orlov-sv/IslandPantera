@@ -13,11 +13,11 @@ public abstract class Animal {
     protected Location location;
 
     @Getter
-    protected int weight;
+    protected double weight;
     protected  int maxAn;
     protected int speed;
-    protected int foodNeed;
-    protected int foodEaten;
+    protected double foodNeed;
+    protected double foodEaten;
     volatile public boolean alive;
 
 
