@@ -10,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public abstract class Predator extends Animal {
 
     @Override
-    protected void eat(Location location){
+    public void eat(Location location){
         List<Animal> animals = new ArrayList<>(location.getAnimals());
         for (Animal animal: animals){
             if (animal == this) continue;
@@ -24,6 +24,17 @@ public abstract class Predator extends Animal {
                 return;
             }
         }
+    }
+
+    public void checkHunger() {
+        if (!alive) return;
+
+        if (foodEaten < foodNeed) {
+            die(); // животное умирает от голода
+        }
+
+        // Сброс еды на следующий такт
+        foodEaten = 0;
     }
 
     protected abstract int getEatChance(Animal animal);

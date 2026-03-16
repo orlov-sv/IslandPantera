@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public abstract class Herbivore extends Animal{
 
     @Override
-    protected void eat(Location location) {
+    public void eat(Location location) {
         List<Plant> plants = new ArrayList<>(location.getPlants());
 
         for(Plant plant: plants){
@@ -27,6 +27,16 @@ public abstract class Herbivore extends Animal{
 
         }
 
+    }
+    public void checkHunger() {
+        if (!alive) return;
+
+        if (foodEaten < foodNeed) {
+            die(); // животное умирает от голода
+        }
+
+        // Сброс еды на следующий такт
+        foodEaten = 0;
     }
 
     @Override

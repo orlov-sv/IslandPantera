@@ -6,8 +6,10 @@ import lombok.Getter;
 public class Plant {
 
     private boolean alive = true;
-    @Getter
-    private int weight = 1;
+
+    public final int weight = 1;
+
+    public static final int maxPlant = 200;
 
     public boolean isAlive() {
         return alive;

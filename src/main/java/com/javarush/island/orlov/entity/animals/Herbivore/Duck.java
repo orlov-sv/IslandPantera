@@ -17,7 +17,7 @@ public class Duck extends Herbivore {
     }
 
     @Override
-    protected void eat(Location location){
+    public void eat(Location location){
         List<Animal> animals = new ArrayList<>(location.getAnimals());
         for (Animal animal: animals){
             if (animal == this) continue;

@@ -14,6 +14,7 @@ public abstract class Animal {
 
     @Getter
     protected double weight;
+    @Getter
     protected  int maxAn;
     protected int speed;
     protected double foodNeed;
@@ -44,6 +45,7 @@ public abstract class Animal {
             synchronized (newLocation){
                 location.removeAnimals(this);
                 newLocation.addAnimals(this);
+                this.setLocation(newLocation);
                 }
             }
 
@@ -51,7 +53,7 @@ public abstract class Animal {
     }
 
 
-    protected abstract void eat(Location location);
+    public abstract void eat(Location location);
 
     public void reproduce(){
         if (!alive) return;
@@ -73,6 +75,8 @@ public abstract class Animal {
     }
 
     protected abstract Animal createChild();
+
+    public abstract void checkHunger();
 
     public void die(){
         alive = false;
