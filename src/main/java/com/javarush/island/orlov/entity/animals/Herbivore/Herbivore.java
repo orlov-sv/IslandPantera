@@ -32,10 +32,10 @@ public abstract class Herbivore extends Animal{
         if (!alive) return;
 
         if (foodEaten < foodNeed) {
-            die(); // животное умирает от голода
+            die();
         }
 
-        // Сброс еды на следующий такт
+
         foodEaten = 0;
     }
 

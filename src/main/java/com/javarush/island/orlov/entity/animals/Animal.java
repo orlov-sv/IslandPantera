@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class Animal {
 
-    @Setter
+    @Setter @Getter
     protected Location location;
 
     @Getter
@@ -24,6 +24,7 @@ public abstract class Animal {
 
 
     public void move(Island island){
+
         if (!alive) return;
 
         int dx = ThreadLocalRandom.current().nextInt(-1,2);
@@ -40,14 +41,21 @@ public abstract class Animal {
 
         Location newLocation = island.getLocations()[newX][newY];
 
-        //Надо здесь избежать deadlock, но как правильнее?
-        synchronized (location){
-            synchronized (newLocation){
+        Location first = location;
+        Location second = newLocation;
+
+        if (System.identityHashCode(first) > System.identityHashCode(second)) {
+            first = newLocation;
+            second = location;
+        }
+
+        synchronized (first) {
+            synchronized (second) {
                 location.removeAnimals(this);
                 newLocation.addAnimals(this);
                 this.setLocation(newLocation);
-                }
             }
+        }
 
 
     }
@@ -65,7 +73,7 @@ public abstract class Animal {
                     if(animal.getClass() == this.getClass())count++;
                 }
 
-                if (count >= 2 && count < maxAn){
+            if (count >= 2 && count < maxAn && ThreadLocalRandom.current().nextInt(100) < 20){
                     Animal baby = createChild();
                     baby.setLocation(location);
                     location.addAnimals(baby);
@@ -80,9 +88,9 @@ public abstract class Animal {
 
     public void die(){
         alive = false;
-        synchronized (location){
+
         location.removeAnimals(this);
-        }
+
     }
 
 }

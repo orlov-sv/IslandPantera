@@ -49,8 +49,9 @@ public class Location {
         for (Animal animal : animalsCopy) {
             if(!animal.alive) continue;
 
+
             animal.move(island);
-            animal.eat(this);
+            animal.eat(animal.getLocation());
             animal.reproduce();
             animal.checkHunger();
         }

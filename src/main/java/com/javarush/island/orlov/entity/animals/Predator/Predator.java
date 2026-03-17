@@ -8,32 +8,42 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class Predator extends Animal {
-
+    private int hungerTicks = 0;
     @Override
     public void eat(Location location){
+
         List<Animal> animals = new ArrayList<>(location.getAnimals());
         for (Animal animal: animals){
+            if (foodEaten >= foodNeed) break;
+
             if (animal == this) continue;
             if (!animal.alive) continue;
-            int chance =  getEatChance(animal);
+
+            int chance = getEatChance(animal);
             if (chance == 0) continue;
+
             int random = ThreadLocalRandom.current().nextInt(100);
             if (random < chance){
                 animal.die();
                 foodEaten += animal.getWeight();
-                return;
             }
         }
+
     }
 
     public void checkHunger() {
         if (!alive) return;
 
         if (foodEaten < foodNeed) {
-            die(); // животное умирает от голода
+            hungerTicks++;
+        } else {
+            hungerTicks = 0;
         }
 
-        // Сброс еды на следующий такт
+        if (hungerTicks >= 3) {
+            die();
+        }
+
         foodEaten = 0;
     }
 

@@ -10,6 +10,7 @@ import lombok.Getter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -88,14 +89,27 @@ public class Island {
    }
 
     public void goAnimals(ExecutorService animalPool) {
+        CountDownLatch latch = new CountDownLatch(width * height);
+
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 Location location = locations[i][j];
-                animalPool.submit(()->
-                        location.goAnimals(this));
+
+                animalPool.submit(() -> {
+                    try {
+                        location.goAnimals(this);
+                    } finally {
+                        latch.countDown();
+                    }
+                });
             }
         }
 
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     public void goPlants() {

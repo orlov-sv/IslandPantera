@@ -20,12 +20,11 @@ public class Simulation {
     }
 
     public void start(){
-        ses.scheduleAtFixedRate(()-> {
+        ses.scheduleWithFixedDelay(()-> {
 
             island.goAnimals(animalPool);
             island.goPlants();
             island.printStat();
-
 
                 },0, 1, TimeUnit.SECONDS);
     }
